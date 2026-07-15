@@ -394,41 +394,58 @@ export function Certifications() {
   );
 }
 
+function TestimonialCard({ t }) {
+  return (
+    <div className="relative w-[360px] md:w-[440px] lg:w-[520px] flex-shrink-0 rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.05] to-transparent p-7 md:p-9 hover:border-red-500/40 hover:from-white/[0.08] transition-all duration-500 group">
+      <Quote className="w-10 h-10 text-red-600/70 mb-4 group-hover:scale-110 group-hover:text-red-500 transition-transform" />
+      <div className="flex items-center gap-1 mb-3">
+        {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+      </div>
+      <p className="font-display text-lg md:text-xl font-medium text-white/95 leading-snug line-clamp-5">
+        &ldquo;{t.quote}&rdquo;
+      </p>
+      <div className="mt-6 pt-5 border-t border-white/10 flex items-center gap-3">
+        <div className="w-11 h-11 rounded-full bg-gradient-to-br from-red-600 to-red-900 flex items-center justify-center text-white font-display font-bold text-lg flex-shrink-0">
+          {t.name.split(' ').map(w => w[0]).slice(0, 2).join('')}
+        </div>
+        <div>
+          <div className="text-white font-semibold text-sm">{t.name}</div>
+          <div className="text-xs text-white/55">{t.role}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Testimonials() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx(i => (i + 1) % testimonials.length), 5500);
-    return () => clearInterval(t);
-  }, []);
-  const t = testimonials[idx];
+  // Duplicate list several times to make the marquee feel truly endless
+  const loop = [...testimonials, ...testimonials, ...testimonials];
   return (
     <section className="section relative bg-black overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-20" />
       <div className="relative max-w-content container-p">
-        <SectionHeader center eyebrow="Client Voices" title={<>Loved by <span className="text-gradient-red">India&#39;s biggest names.</span></>} />
+        <SectionHeader center eyebrow="Client Voices" title={<>Loved by <span className="text-gradient-red">India&#39;s biggest names.</span></>}
+          subtitle="Real feedback from the leaders of India's largest oil, infrastructure and industrial operators." />
+      </div>
 
-        <motion.div key={idx} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
-          className="relative max-w-4xl mx-auto rounded-3xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-8 md:p-14">
-          <Quote className="w-14 h-14 text-red-600/70 mb-6" />
-          <div className="flex items-center gap-1 mb-4">
-            {[...Array(t.rating)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
-          </div>
-          <p className="font-display text-2xl md:text-3xl font-medium text-white leading-snug">
-            &ldquo;{t.quote}&rdquo;
-          </p>
-          <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
-            <div>
-              <div className="text-white font-semibold">{t.name}</div>
-              <div className="text-sm text-white/60">{t.role}</div>
-            </div>
-            <div className="flex items-center gap-2">
-              {testimonials.map((_, i) => (
-                <button key={i} onClick={() => setIdx(i)}
-                  className={`h-1.5 rounded-full transition-all ${i === idx ? 'bg-red-500 w-8' : 'bg-white/20 w-3'}`} />
-              ))}
-            </div>
-          </div>
-        </motion.div>
+      {/* Marquee track */}
+      <div className="relative mt-4 group">
+        {/* Left & right gradient shadow masks */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-r from-black via-black/80 to-transparent z-20" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-24 md:w-48 bg-gradient-to-l from-black via-black/80 to-transparent z-20" />
+
+        <div className="flex marquee-track-slow gap-6 py-6 will-change-transform">
+          {loop.map((t, i) => (
+            <TestimonialCard key={i} t={t} />
+          ))}
+        </div>
+
+        {/* Second row - reverse direction for that premium double-marquee feel */}
+        <div className="flex marquee-track-slow-reverse gap-6 py-6 will-change-transform">
+          {[...testimonials.slice().reverse(), ...testimonials.slice().reverse(), ...testimonials.slice().reverse()].map((t, i) => (
+            <TestimonialCard key={`r-${i}`} t={t} />
+          ))}
+        </div>
       </div>
     </section>
   );

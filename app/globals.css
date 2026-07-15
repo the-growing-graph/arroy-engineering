@@ -112,6 +112,27 @@ body {
   animation: marquee 40s linear infinite;
 }
 
+@keyframes marquee-slow {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-33.3333%, 0, 0); }
+}
+@keyframes marquee-slow-reverse {
+  from { transform: translate3d(-33.3333%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.marquee-track-slow {
+  animation: marquee-slow 60s linear infinite;
+  width: max-content;
+}
+.marquee-track-slow-reverse {
+  animation: marquee-slow-reverse 75s linear infinite;
+  width: max-content;
+}
+.marquee-track-slow:hover,
+.marquee-track-slow-reverse:hover {
+  animation-play-state: paused;
+}
+
 /* Glow */
 .glow-red {
   box-shadow: 0 0 40px -8px rgba(220, 38, 38, 0.55), 0 0 80px -20px rgba(220, 38, 38, 0.35);

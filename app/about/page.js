@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PageHero } from '@/components/site/page-hero';
-import { Stats, Certifications, Testimonials, WhyChoose, ProcessTimeline, CTABanner } from '@/components/site/sections';
+import { Stats, Certifications, WhyChoose, ProcessTimeline, CTABanner } from '@/components/site/sections';
 import { IMG, milestones } from '@/lib/site-data';
 import { Target, Eye, Sparkles, Award, Building2, Users, Handshake } from 'lucide-react';
 import { useQuote } from '@/lib/quote-context';
@@ -130,7 +130,6 @@ export default function AboutPage() {
       <Stats />
       <ProcessTimeline />
       <Certifications />
-      <Testimonials />
       <CTABanner onQuote={() => setOpen(true)} />
     </main>
   );

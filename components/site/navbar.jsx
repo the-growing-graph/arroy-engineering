@@ -42,27 +42,27 @@ export function Navbar() {
 
   return (
     <>
-      <div className="hidden lg:block bg-black text-white/60 text-xs border-b border-white/5">
-        <div className="max-w-content container-p py-2 flex items-center justify-between">
-          <span>🇮🇳 Delivering Engineering Excellence Across India since 2007</span>
-          <div className="flex items-center gap-5">
-            <a href="tel:+919876543210" className="hover:text-white transition">+91 98765 43210</a>
-            <a href="mailto:info@arroyoengineering.com" className="hover:text-white transition">info@arroyoengineering.com</a>
-            <span className="text-amber-400/80">ISO 9001 · 14001 · OHSAS 18001</span>
-          </div>
-        </div>
-      </div>
-
       <motion.header
         initial={{ y: -20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }}
-        className={cn('sticky top-0 z-50 transition-all duration-500', scrolled ? 'glass-strong border-b border-white/10' : 'bg-black/70 backdrop-blur-md border-b border-white/5')}
+        className={cn('sticky top-0 z-[999] transition-all duration-500 overflow-visible', scrolled ? 'glass-strong border-b border-white/10' : 'bg-black/70 backdrop-blur-md border-b border-white/5')}
       >
-        <div className="max-w-content container-p flex items-center justify-between h-[72px]">
+        <div className="max-w-content container-p relative flex items-center justify-between h-[72px]">
           <ArroyoLogo size={44} />
 
           <nav className="hidden lg:flex items-center gap-1">
             {LINKS.map(l => l.hasSub ? (
-              <div key={l.href} className="relative" onMouseEnter={() => setSubmenu(true)} onMouseLeave={() => setSubmenu(false)}>
+              // FIX 1: added "relative" so the dropdown (now absolute) positions
+              // itself against THIS div, not against the whole viewport.
+              // This is what makes it center under the Services link instead
+              // of sliding to the right (that was caused by the parent
+              // motion.header having a CSS transform, which breaks `fixed` 
+              // positioning and makes it relative to that transformed ancestor).
+              <div
+                key={l.href}
+                className="relative"
+                onMouseEnter={() => setSubmenu(true)}
+                onMouseLeave={() => setSubmenu(false)}
+              >
                 <Link href={l.href} className={cn('relative flex items-center gap-1 px-4 py-2 text-sm transition group',
                   isActive(l.href) ? 'text-white' : 'text-white/70 hover:text-white')}>
                   {l.label}
@@ -72,13 +72,28 @@ export function Navbar() {
                 </Link>
                 <AnimatePresence>
                   {submenu && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }} transition={{ duration: 0.2 }}
-                      className="absolute left-1/2 -translate-x-1/2 top-full pt-3 w-[680px]">
-                      <div className="glass-strong rounded-2xl border border-white/10 p-4 shadow-2xl">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10, x: "-50%" }}
+                      animate={{ opacity: 1, y: 0, x: "-50%" }}
+                      exit={{ opacity: 0, y: 10, x: "-50%" }}
+                      transition={{ duration: 0.2 }}
+                      // FIX 2: fixed -> absolute, top-[72px] -> top-full.
+                      // Now it's positioned relative to the parent div above
+                      // (which sits right under the Services link), so
+                      // left-1/2 -translate-x-1/2 correctly centers it under
+                      // that link instead of under the whole page/header.
+                      className="absolute top-full left-1/2 pt-3 w-[700px] z-[1000]"
+                    >
+                      {/* Invisible bridge so moving the mouse from the link
+                          down into the dropdown never breaks hover, since
+                          both pieces are now inside the same relative parent
+                          and this fills the pt-3 gap between them. */}
+                      <div className="absolute top-0 left-0 right-0 h-3" />
+                      <div className="bg-[#0a0a0a] rounded-2xl border border-white/10 p-4 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)]">
                         <div className="grid grid-cols-2 gap-1">
                           {services.map((s) => (
                             <Link key={s.slug} href={`/services/${s.slug}`}
-                              className="group flex items-start gap-3 p-3 rounded-xl hover:bg-white/[0.05] transition">
+                              className="group flex items-start gap-3 p-3 rounded-xl hover:bg-white/[0.06] transition">
                               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600/20 to-transparent border border-red-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:border-red-500 transition">
                                 <s.icon className="w-4 h-4 text-red-400 group-hover:text-white transition" />
                               </div>
@@ -126,7 +141,7 @@ export function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl lg:hidden overflow-y-auto">
+            className="fixed inset-0 z-[10000] bg-black/95 backdrop-blur-xl lg:hidden overflow-y-auto">
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <ArroyoLogo size={40} />
               <button onClick={() => setOpen(false)} className="p-2 text-white"><X className="w-6 h-6" /></button>

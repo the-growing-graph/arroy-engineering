@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { PageHero } from '@/components/site/page-hero';
 import { projects, projectCategories, IMG } from '@/lib/site-data';
 import { MapPin, Calendar, IndianRupee, ArrowUpRight } from 'lucide-react';
-import { CTABanner, Testimonials } from '@/components/site/sections';
+import { CTABanner, FAQ } from '@/components/site/sections';
 import { useQuote } from '@/lib/quote-context';
 
 export default function ProjectsPage() {
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
           ))}
         </div>
       </section>
-      <Testimonials />
+      <FAQ />
       <CTABanner onQuote={() => setOpen(true)} />
     </main>
   );

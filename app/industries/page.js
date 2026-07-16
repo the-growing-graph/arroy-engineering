@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { PageHero } from '@/components/site/page-hero';
 import { industries, IMG } from '@/lib/site-data';
-import { CTABanner, Testimonials } from '@/components/site/sections';
+import { CTABanner, FAQ } from '@/components/site/sections';
 import { ArrowUpRight } from 'lucide-react';
 import { useQuote } from '@/lib/quote-context';
 
@@ -41,7 +41,7 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <Testimonials />
+      <FAQ />
       <CTABanner onQuote={() => setOpen(true)} />
     </main>
   );

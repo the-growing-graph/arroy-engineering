@@ -85,7 +85,7 @@ export function Contact() {
 
           <div className="mt-10 space-y-5">
             {[
-              { icon: MapPin, k: 'Head Office', v: 'Level 12, Arroyo Tower, BKC, Mumbai – 400051, India' },
+              { icon: MapPin, k: 'Office Address', v: 'B-25, Sector 58, Noida, UP, India' },
               { icon: Phone, k: 'Call Us', v: '+91 98765 43210 · +91 22 4000 8000', href: 'tel:+919876543210' },
               { icon: Mail, k: 'Email', v: 'info@arroyoengineering.com · quote@arroyoengineering.com', href: 'mailto:info@arroyoengineering.com' },
               { icon: Clock, k: 'Business Hours', v: 'Mon–Sat, 9:00 AM – 7:00 PM IST' },
@@ -105,7 +105,7 @@ export function Contact() {
           <div className="mt-8 rounded-2xl overflow-hidden border border-white/10 aspect-video">
             <iframe
               title="Arroyo HQ Map"
-              src="https://www.google.com/maps?q=Bandra+Kurla+Complex+Mumbai&output=embed"
+              src="https://www.google.com/maps?q=B-25,+Sector+58,+Noida,+UP&output=embed"
               className="w-full h-full grayscale contrast-125"
               loading="lazy" />
           </div>

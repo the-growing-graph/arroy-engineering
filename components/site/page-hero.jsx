@@ -6,7 +6,7 @@ import { ChevronRight } from 'lucide-react';
 
 export function PageHero({ eyebrow, title, subtitle, image, crumbs = [] }) {
   return (
-    <section className="relative pt-32 md:pt-40 pb-16 md:pb-24 overflow-hidden bg-black">
+    <section className="relative pt-[30px] md:pt-[45px] pb-6 md:pb-8 overflow-hidden bg-black">
       {image && (
         <div className="absolute inset-0 -z-10">
           <Image src={image} alt="" fill priority sizes="100vw" className="object-cover opacity-40" />

@@ -26,7 +26,7 @@ export function Hero({ onQuote }) {
       <div className="absolute -left-40 top-1/3 w-[500px] h-[500px] rounded-full bg-red-600/20 blur-[120px]" />
       <div className="absolute -right-32 bottom-10 w-[400px] h-[400px] rounded-full bg-blue-700/20 blur-[120px]" />
 
-      <motion.div style={{ opacity }} className="relative max-w-content container-p w-full pt-32 pb-24">
+      <motion.div style={{ opacity }} className="relative max-w-content container-p w-full pt-[30px] pb-18">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-8">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.6, duration: 0.6 }}

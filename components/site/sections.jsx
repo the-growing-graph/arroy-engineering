@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { services, industries, whyChoose, processSteps, projects, projectCategories, stats, testimonials, faqs, IMG } from '@/lib/site-data';
 import { ArrowRight, ArrowUpRight, Star, ChevronDown, MapPin, Calendar, IndianRupee, Sparkles, Target, Rocket, Eye, Quote } from 'lucide-react';
@@ -60,9 +61,9 @@ export function About() {
             <a href="#services" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition">
               Read More <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#contact" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm border-b border-white/20 pb-1">
+            <Link href="/contact" className="inline-flex items-center gap-2 text-white/80 hover:text-white text-sm border-b border-white/20 pb-1">
               Talk to our leadership team
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -120,9 +121,9 @@ export function Services() {
                 <h3 className="font-display text-xl font-bold text-white group-hover:text-red-500 transition-colors">{s.title}</h3>
                 <p className="mt-2 text-sm text-white/60 leading-relaxed">{s.desc}</p>
                 <div className="mt-5 flex items-center justify-between">
-                  <a href="#contact" className="inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:text-red-400 transition">
+                  <Link href={`/services/${s.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-white group-hover:text-red-400 transition">
                     Learn More <ArrowUpRight className="w-4 h-4" />
-                  </a>
+                  </Link>
                   <span className="text-xs text-white/30">0{i + 1}</span>
                 </div>
               </div>
@@ -249,23 +250,25 @@ export function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {list.map((p, i) => (
-            <motion.a key={p.title + i} href="#contact" initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp} transition={{ delay: (i % 3) * 0.08 }}
-              className="group relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] block">
-              <Image src={p.img} alt={p.title} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-[1.2s]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-              <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest bg-white/10 border border-white/20 backdrop-blur-md text-white">{p.cat}</div>
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-tight">{p.title}</h3>
-                <div className="flex items-center gap-4 mt-3 text-xs text-white/70">
-                  <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {p.loc}</span>
-                  <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {p.year}</span>
-                  <span className="flex items-center gap-1"><IndianRupee className="w-3 h-3" /> {p.value.replace('₹', '')}</span>
+            <motion.div key={p.title + i} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUp} transition={{ delay: (i % 3) * 0.08 }}>
+              <Link href={`/projects/${p.slug}`}
+                className="group relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] block">
+                <Image src={p.img} alt={p.title} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-[1.2s]" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest bg-white/10 border border-white/20 backdrop-blur-md text-white">{p.cat}</div>
+                <div className="absolute inset-x-0 bottom-0 p-6">
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-tight">{p.title}</h3>
+                  <div className="flex items-center gap-4 mt-3 text-xs text-white/70">
+                    <span className="flex items-center gap-1"><MapPin className="w-3 h-3" /> {p.loc}</span>
+                    <span className="flex items-center gap-1"><Calendar className="w-3 h-3" /> {p.year}</span>
+                    <span className="flex items-center gap-1"><IndianRupee className="w-3 h-3" /> {p.value.replace('₹', '')}</span>
+                  </div>
                 </div>
-              </div>
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-red-600 group-hover:border-red-500 transition">
-                <ArrowUpRight className="w-4 h-4 text-white" />
-              </div>
-            </motion.a>
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-red-600 group-hover:border-red-500 transition">
+                  <ArrowUpRight className="w-4 h-4 text-white" />
+                </div>
+              </Link>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -458,9 +461,9 @@ export function FAQ() {
       <div className="relative max-w-content container-p grid lg:grid-cols-12 gap-14">
         <div className="lg:col-span-5">
           <SectionHeader eyebrow="FAQ" title={<>Frequently asked <span className="text-gradient-red">questions.</span></>} subtitle="Everything you need to know about working with Arroyo Engineering." />
-          <a href="#contact" className="inline-flex items-center gap-2 text-white/80 border-b border-white/20 pb-1">
+          <Link href="/contact" className="inline-flex items-center gap-2 text-white/80 border-b border-white/20 pb-1">
             Have another question? Talk to us <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
         <div className="lg:col-span-7 space-y-3">
           {faqs.map((f, i) => (

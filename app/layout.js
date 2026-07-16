@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
     name: 'Arroyo Engineering & Infrastructure Pvt. Ltd.',
     url: process.env.NEXT_PUBLIC_BASE_URL,
     description: 'EPC, Civil, Oil & Gas, Fuel Station, Roads, Bridges and Heavy Machinery.',
-    address: { '@type': 'PostalAddress', addressLocality: 'Mumbai', addressRegion: 'MH', addressCountry: 'IN' },
+    address: { '@type': 'PostalAddress', addressLocality: 'Noida', addressRegion: 'UP', addressCountry: 'IN' },
     contactPoint: { '@type': 'ContactPoint', telephone: '+91-98765-43210', contactType: 'customer service' },
   }
   return (

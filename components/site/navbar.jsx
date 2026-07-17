@@ -14,7 +14,6 @@ const LINKS = [
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services', hasSub: true },
   { href: '/industries', label: 'Industries' },
-  { href: '/projects', label: 'Projects' },
   { href: '/contact', label: 'Contact' },
 ];
 

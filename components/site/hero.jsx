@@ -28,7 +28,7 @@ export function Hero({ onQuote }) {
 
       <motion.div style={{ opacity }} className="relative max-w-content container-p w-full pt-[30px] pb-18">
         <div className="grid lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-8">
+          <div className="lg:col-span-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.6, duration: 0.6 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/5 backdrop-blur-md text-xs uppercase tracking-[0.2em] text-white/80">
               <span className="relative flex h-2 w-2">
@@ -81,42 +81,6 @@ export function Hero({ onQuote }) {
               ))}
             </motion.div>
           </div>
-
-          {/* Floating card */}
-          <motion.div initial={{ opacity: 0, x: 60 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.0, duration: 0.8 }}
-            className="lg:col-span-4 hidden lg:block">
-            <div className="relative glass-strong rounded-2xl p-6 border border-white/10 shadow-2xl">
-              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 opacity-20 blur-2xl" />
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center"><Award className="w-5 h-5 text-white" /></div>
-                <div>
-                  <div className="text-white font-semibold">Certified Excellence</div>
-                  <div className="text-xs text-white/50">ISO · OHSAS · NHAI Approved</div>
-                </div>
-              </div>
-              <div className="space-y-4 border-t border-white/10 pt-5">
-                {[
-                  { icon: ShieldCheck, t: 'Zero-Harm Safety Record' },
-                  { icon: Building2, t: 'PAN-India Execution' },
-                  { icon: Award, t: 'HPCL / IOCL / BPCL Empanelled' },
-                ].map((r, i) => (
-                  <div key={i} className="flex items-center gap-3 text-sm text-white/80">
-                    <r.icon className="w-4 h-4 text-emerald-400" /> {r.t}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 pt-5 border-t border-white/10">
-                <div className="text-xs text-white/50 mb-1">Client Rating</div>
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <svg key={i} className="w-5 h-5 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                  ))}
-                  <span className="ml-2 text-white/80 text-sm font-semibold">4.9/5</span>
-                </div>
-                <div className="text-xs text-white/50 mt-1">from 320+ clients</div>
-              </div>
-            </div>
-          </motion.div>
         </div>
 
         {/* Scroll indicator */}

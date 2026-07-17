@@ -8,6 +8,7 @@ import { IMG, milestones } from '@/lib/site-data';
 import { Target, Eye, Sparkles, Award, Building2, Users, Handshake } from 'lucide-react';
 import { useQuote } from '@/lib/quote-context';
 
+
 export default function AboutPage() {
   const { setOpen } = useQuote();
   return (
@@ -56,7 +57,7 @@ export default function AboutPage() {
             <div className="flex items-center gap-2 mb-2">
               <Image src={IMG.ceo} alt="CEO" width={40} height={40} className="rounded-full object-cover" />
               <div>
-                <div className="text-white text-sm font-semibold">Amit Arroyo</div>
+                <div className="text-white text-sm font-semibold">Mr. Chandra Sheikhar</div>
                 <div className="text-[10px] text-white/50 uppercase tracking-widest">Founder & CEO</div>
               </div>
             </div>
@@ -66,7 +67,7 @@ export default function AboutPage() {
       </section>
 
       {/* Milestones timeline */}
-      <section className="section bg-[#0a0a0a] border-y border-white/5">
+      {/* <section className="section bg-[#0a0a0a] border-y border-white/5">
         <div className="max-w-content container-p">
           <div className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-[11px] uppercase tracking-[0.25em] text-white/70">
@@ -93,7 +94,7 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Leadership */}
       <section className="section max-w-content container-p">
@@ -105,7 +106,7 @@ export default function AboutPage() {
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { n: 'Amit Arroyo', r: 'Founder & CEO', b: '25+ years in civil & EPC, ex-L&T. IIT Bombay.', img: IMG.ceo },
+            { n: 'Mr. Chandra Sheikhar', r: 'Founder & CEO', b: '25+ years in civil & EPC, ex-L&T. IIT Bombay.', img: IMG.ceo },
             { n: 'Sneha Rao', r: 'Executive Director — Oil & Gas', b: '20+ years in downstream & terminals, ex-Reliance.', img: IMG.about },
             { n: 'Rajiv Malhotra', r: 'CTO — Bridges & Roads', b: 'IIT-Roorkee. Delivered 32 bridges nationally.', img: IMG.aboutAlt },
             { n: 'Priya Krishnan', r: 'COO', b: '18+ years, ex-Larsen & Toubro. IIM Ahmedabad.', img: IMG.industry3 },
@@ -127,9 +128,7 @@ export default function AboutPage() {
       </section>
 
       <WhyChoose />
-      <Stats />
-      <ProcessTimeline />
-      <Certifications />
+      {/* <ProcessTimeline /> */}
       <CTABanner onQuote={() => setOpen(true)} />
     </main>
   );

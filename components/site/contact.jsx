@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2, Loader2, Upload } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2, Loader2, Upload, ChevronDown } from 'lucide-react';
 import { toast } from 'sonner';
 
 const schema = z.object({
@@ -12,21 +12,16 @@ const schema = z.object({
   company: z.string().optional(),
   phone: z.string().min(10, 'Enter a valid phone number'),
   email: z.string().email('Enter a valid email'),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  location: z.string().optional(),
   service: z.string().min(1, 'Select a service'),
-  budget: z.string().optional(),
   projectType: z.string().optional(),
-  timeline: z.string().optional(),
   message: z.string().min(10, 'Tell us a bit about your requirement'),
   terms: z.literal(true, { errorMap: () => ({ message: 'Please accept the terms' }) }),
 });
 
-const SERVICES = ['Fuel Station Construction', 'Oil & Gas Infrastructure', 'Civil Engineering', 'Road Construction', 'Bridge Construction', 'Industrial Construction', 'Heavy Machinery', 'Equipment Supply', 'EPC Projects', 'Infrastructure Development'];
+const SERVICES = ['Machinery, Equipments', 'Infrastructure', 'Fuel Station', 'Oil & Gas', 'Construction', 'Road Sectors'];
 const BUDGETS = ['< ₹10 Lakh', '₹10–50 Lakh', '₹50 Lakh – 1 Cr', '₹1–5 Cr', '₹5–25 Cr', '> ₹25 Cr'];
 const TIMELINES = ['Immediate', 'Within 1 Month', '1–3 Months', '3–6 Months', '6+ Months'];
-const TYPES = ['Government', 'Private', 'PSU', 'Public–Private', 'Individual'];
+const TYPES = ['Government', 'Private', 'Public–Private',];
 
 function Field({ label, required, error, children }) {
   return (
@@ -88,7 +83,6 @@ export function Contact() {
               { icon: MapPin, k: 'Office Address', v: 'B-25, Sector 58, Noida, UP, India' },
               { icon: Phone, k: 'Call Us', v: '+91 98765 43210 · +91 22 4000 8000', href: 'tel:+919876543210' },
               { icon: Mail, k: 'Email', v: 'info@arroyoengineering.com · quote@arroyoengineering.com', href: 'mailto:info@arroyoengineering.com' },
-              { icon: Clock, k: 'Business Hours', v: 'Mon–Sat, 9:00 AM – 7:00 PM IST' },
             ].map((c, i) => (
               <a key={i} href={c.href || '#'} className="flex items-start gap-4 group">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-red-600/20 to-transparent border border-red-500/30 flex items-center justify-center flex-shrink-0 group-hover:bg-red-600 group-hover:border-red-500 transition">
@@ -106,7 +100,7 @@ export function Contact() {
             <iframe
               title="Arroyo HQ Map"
               src="https://www.google.com/maps?q=B-25,+Sector+58,+Noida,+UP&output=embed"
-              className="w-full h-full grayscale contrast-125"
+              className="w-full h-full"
               loading="lazy" />
           </div>
         </div>
@@ -140,42 +134,23 @@ export function Contact() {
                   <Field label="Email Address" required error={errors.email?.message}>
                     <input {...register('email')} className={inputCls} placeholder="you@company.com" />
                   </Field>
-                  <Field label="City" error={errors.city?.message}>
-                    <input {...register('city')} className={inputCls} placeholder="Mumbai" />
-                  </Field>
-                  <Field label="State" error={errors.state?.message}>
-                    <input {...register('state')} className={inputCls} placeholder="Maharashtra" />
-                  </Field>
-                </div>
-
-                <Field label="Project Location" error={errors.location?.message}>
-                  <input {...register('location')} className={inputCls} placeholder="e.g. NH-48, Ahmedabad-Vadodara stretch" />
-                </Field>
-
-                <div className="grid md:grid-cols-2 gap-5">
                   <Field label="Service Required" required error={errors.service?.message}>
-                    <select {...register('service')} className={inputCls}>
-                      <option value="">Select a service</option>
-                      {SERVICES.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
+                    <div className="relative">
+                      <select {...register('service')} className={`${inputCls} appearance-none pr-10 cursor-pointer`}>
+                        <option value="" className="bg-[#0a0a0a] text-white">Select a service</option>
+                        {SERVICES.map(s => <option key={s} value={s} className="bg-[#0a0a0a] text-white">{s}</option>)}
+                      </select>
+                      <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none" />
+                    </div>
                   </Field>
                   <Field label="Project Type" error={errors.projectType?.message}>
-                    <select {...register('projectType')} className={inputCls}>
-                      <option value="">Select type</option>
-                      {TYPES.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Estimated Budget" error={errors.budget?.message}>
-                    <select {...register('budget')} className={inputCls}>
-                      <option value="">Select budget</option>
-                      {BUDGETS.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </Field>
-                  <Field label="Timeline" error={errors.timeline?.message}>
-                    <select {...register('timeline')} className={inputCls}>
-                      <option value="">Select timeline</option>
-                      {TIMELINES.map(s => <option key={s} value={s}>{s}</option>)}
-                    </select>
+                    <div className="relative">
+                      <select {...register('projectType')} className={`${inputCls} appearance-none pr-10 cursor-pointer`}>
+                        <option value="" className="bg-[#0a0a0a] text-white">Select type</option>
+                        {TYPES.map(s => <option key={s} value={s} className="bg-[#0a0a0a] text-white">{s}</option>)}
+                      </select>
+                      <ChevronDown className="absolute right-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none" />
+                    </div>
                   </Field>
                 </div>
 
@@ -183,20 +158,6 @@ export function Contact() {
                   <textarea {...register('message')} rows={4} className={inputCls} placeholder="Share as much detail as you can about your project scope, site conditions, timeline, etc." />
                 </Field>
 
-                <Field label="Attach Documents (Optional)">
-                  <label className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/[0.03] border border-dashed border-white/15 text-white/60 cursor-pointer hover:border-red-500/40 transition">
-                    <Upload className="w-4 h-4" />
-                    <span className="text-sm">Drop or click to upload site layout, RFQ, drawings...</span>
-                    <input type="file" className="hidden" />
-                  </label>
-                </Field>
-
-                <label className="flex items-start gap-3 cursor-pointer">
-                  <input type="checkbox" {...register('terms')} className="mt-1 w-4 h-4 accent-red-600" />
-                  <span className="text-sm text-white/60">
-                    I agree to be contacted by Arroyo Engineering and accept the <a href="#" className="text-white underline">privacy policy</a> & <a href="#" className="text-white underline">terms</a>.
-                  </span>
-                </label>
                 {errors.terms?.message && <div className="text-xs text-red-400">{errors.terms.message}</div>}
 
                 <button type="submit" disabled={loading}

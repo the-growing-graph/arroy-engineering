@@ -46,9 +46,6 @@ export default function ServicesPage() {
           ))}
         </div>
       </section>
-
-      <WhyChoose />
-      <ProcessTimeline />
       <CTABanner onQuote={() => setOpen(true)} />
     </main>
   );

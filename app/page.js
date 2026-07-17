@@ -1,8 +1,8 @@
 'use client';
 import { Hero, TrustLogos } from '@/components/site/hero';
 import {
-  About, Services, Industries, WhyChoose,
-  Stats, Testimonials, FAQ, CTABanner,
+  About, Services, WhyChoose,
+  Stats, Testimonials, ProcessTimeline, FAQ, CTABanner,
 } from '@/components/site/sections';
 import { useQuote } from '@/lib/quote-context';
 
@@ -13,14 +13,10 @@ function App() {
   return (
     <main className="relative bg-[#050505] text-white overflow-hidden">
       <Hero onQuote={openQuote} />
-      <TrustLogos />
       <About />
       <Services />
-      <Industries />
-      <WhyChoose />
-      <Stats />
+      <ProcessTimeline />
       <Testimonials />
-      {/* <FAQ /> */}
       <CTABanner onQuote={openQuote} />
     </main>
   );

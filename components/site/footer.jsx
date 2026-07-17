@@ -3,6 +3,8 @@ import { ArroyoLogo } from './logo';
 import { Facebook, Linkedin, Instagram, Youtube, ArrowRight, Mail } from 'lucide-react';
 import Link from 'next/link';
 
+import { services } from '@/lib/site-data';
+
 const XIcon = (props) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
     <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -16,12 +18,12 @@ const WhatsAppIcon = (props) => (
 );
 
 const SOCIALS = [
-  { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com', hoverClass: 'hover:bg-[#0a66c2] hover:border-[#0a66c2]' },
-  { name: 'X', icon: XIcon, url: 'https://www.x.com', hoverClass: 'hover:bg-white hover:text-black hover:border-white' },
-  { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com', hoverClass: 'hover:bg-[#1877f2] hover:border-[#1877f2]' },
-  { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com', hoverClass: 'hover:bg-[#e1306c] hover:border-[#e1306c]' },
-  { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com', hoverClass: 'hover:bg-[#ff0000] hover:border-[#ff0000]' },
-  { name: 'WhatsApp', icon: WhatsAppIcon, url: 'https://www.whatsapp.com', hoverClass: 'hover:bg-[#25d366] hover:border-[#25d366]' }
+  { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com', bgClass: 'bg-[#0a66c2] border-[#0a66c2] text-white' },
+  { name: 'X', icon: XIcon, url: 'https://www.x.com', bgClass: 'bg-white border-white text-black' },
+  { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com', bgClass: 'bg-[#1877f2] border-[#1877f2] text-white' },
+  { name: 'Instagram', icon: Instagram, url: 'https://www.instagram.com', bgClass: 'bg-[#e1306c] border-[#e1306c] text-white' },
+  { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com', bgClass: 'bg-[#ff0000] border-[#ff0000] text-white' },
+  { name: 'WhatsApp', icon: WhatsAppIcon, url: 'https://www.whatsapp.com', bgClass: 'bg-[#25d366] border-[#25d366] text-white' }
 ];
 
 export function Footer() {
@@ -38,7 +40,7 @@ export function Footer() {
             <div className="mt-6 flex items-center gap-3">
               {SOCIALS.map((soc) => (
                 <a key={soc.name} href={soc.url} target="_blank" rel="noopener noreferrer" 
-                  className={`w-10 h-10 rounded-full border border-white/15 flex items-center justify-center text-white/70 hover:text-white transition duration-300 ${soc.hoverClass}`}>
+                  className={`w-10 h-10 rounded-full border flex items-center justify-center transition duration-300 hover:scale-105 hover:opacity-90 ${soc.bgClass}`}>
                   <soc.icon className="w-4 h-4" />
                 </a>
               ))}
@@ -48,33 +50,40 @@ export function Footer() {
           <div className="lg:col-span-2">
             <div className="text-white font-display font-semibold mb-5">Quick Links</div>
             <ul className="space-y-3 text-sm text-white/60">
-              {['Home', 'About', 'Services', 'Projects', 'Contact'].map(l => (
-                <li key={l}><a href={`#${l.toLowerCase()}`} className="hover:text-white transition">{l}</a></li>
-              ))}
+              <li><Link href="/" className="hover:text-white transition">Home</Link></li>
+              <li><Link href="/about" className="hover:text-white transition">About</Link></li>
+              <li><Link href="/services" className="hover:text-white transition">Services</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition">Contact</Link></li>
             </ul>
           </div>
           <div className="lg:col-span-2">
             <div className="text-white font-display font-semibold mb-5">Services</div>
             <ul className="space-y-3 text-sm text-white/60">
-              {['Fuel Stations', 'Oil & Gas', 'Civil', 'Roads', 'Bridges', 'EPC'].map(l => (
-                <li key={l}><a href="#services" className="hover:text-white transition">{l}</a></li>
+              {services.map(s => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}`} className="hover:text-white transition">
+                    {s.title}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
           <div className="lg:col-span-4">
-            <div className="text-white font-display font-semibold mb-5">Newsletter</div>
-            <p className="text-sm text-white/60 mb-4">Subscribe for company news, projects and industry insights.</p>
-            <form className="flex items-center gap-2" onSubmit={(e) => { e.preventDefault(); }}>
-              <div className="flex-1 relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                <input type="email" placeholder="your@email.com" className="w-full pl-10 pr-4 py-3 rounded-full bg-white/[0.04] border border-white/10 text-white placeholder:text-white/30 focus:border-red-500/60 outline-none" />
-              </div>
-              <button className="px-5 py-3 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white text-sm font-semibold flex items-center gap-1.5">Subscribe <ArrowRight className="w-4 h-4" /></button>
-            </form>
-            <div className="mt-6 text-xs text-white/40 space-y-1">
-              <div>Office Address: B-25, Sector 58, Noida, UP</div>
-              <div>+91 98765 43210 · info@arroyoengineering.com</div>
-            </div>
+            <div className="text-white font-display font-semibold mb-5">Office Details</div>
+            <ul className="space-y-4 text-sm text-white/60">
+              <li>
+                <span className="text-white font-semibold block mb-1"> Address:</span>
+                B-25, Sector 58, Noida, UP, India
+              </li>
+              <li>
+                <span className="text-white font-semibold block mb-1">Email:</span>
+                <a href="mailto:info@arroyoengineering.com" className="hover:text-white transition">info@arroyoengineering.com</a> · <a href="mailto:quote@arroyoengineering.com" className="hover:text-white transition">quote@arroyoengineering.com</a>
+              </li>
+              <li>
+                <span className="text-white font-semibold block mb-1">Phone Number:</span>
+                <a href="tel:+919876543210" className="hover:text-white transition">+91 98765 43210</a> · <a href="tel:+912240008000" className="hover:text-white transition">+91 22 4000 8000</a>
+              </li>
+            </ul>
           </div>
         </div>
 

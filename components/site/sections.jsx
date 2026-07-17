@@ -85,7 +85,7 @@ export function About() {
             <div className="flex items-center gap-2 mb-2">
               <Image src={IMG.ceo} alt="CEO" width={40} height={40} className="rounded-full object-cover" />
               <div>
-                <div className="text-white text-sm font-semibold">Amit Arroyo</div>
+                <div className="text-white text-sm font-semibold">Mr. Chandra Sheikhar</div>
                 <div className="text-[10px] text-white/50 uppercase tracking-widest">Founder & CEO</div>
               </div>
             </div>

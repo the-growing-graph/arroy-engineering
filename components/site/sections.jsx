@@ -112,7 +112,6 @@ export function Services() {
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image src={s.img} alt={s.title} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-[1.2s]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest bg-white/10 border border-white/20 backdrop-blur-md text-white">{s.tag}</div>
                 <div className="absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg">
                   <s.icon className="w-6 h-6 text-white" />
                 </div>
@@ -255,7 +254,6 @@ export function Projects() {
                 className="group relative rounded-2xl overflow-hidden border border-white/10 aspect-[4/5] block">
                 <Image src={p.img} alt={p.title} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-[1.2s]" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest bg-white/10 border border-white/20 backdrop-blur-md text-white">{p.cat}</div>
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <h3 className="font-display text-xl md:text-2xl font-bold text-white leading-tight">{p.title}</h3>
                   <div className="flex items-center gap-4 mt-3 text-xs text-white/70">

@@ -9,11 +9,11 @@ import { useQuote } from '@/lib/quote-context';
 import { services } from '@/lib/site-data';
 import { cn } from '@/lib/utils';
 
+
 const LINKS = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/services', label: 'Services', hasSub: true },
-  { href: '/industries', label: 'Industries' },
   { href: '/contact', label: 'Contact' },
 ];
 
@@ -102,12 +102,6 @@ export function Navbar() {
                               </div>
                             </Link>
                           ))}
-                        </div>
-                        <div className="mt-3 pt-3 border-t border-white/10 flex items-center justify-between">
-                          <div className="text-xs text-white/50">10 core services delivered PAN-India</div>
-                          <Link href="/services" className="inline-flex items-center gap-2 text-xs font-semibold text-red-400 hover:text-red-300">
-                            View all services <ArrowRight className="w-3.5 h-3.5" />
-                          </Link>
                         </div>
                       </div>
                     </motion.div>

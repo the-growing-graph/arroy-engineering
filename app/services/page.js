@@ -26,7 +26,6 @@ export default function ServicesPage() {
                 <div className="relative aspect-[16/10] overflow-hidden">
                   <Image src={s.img} alt={s.title} fill sizes="(min-width:1024px) 30vw, 100vw" className="object-cover group-hover:scale-110 transition-transform duration-1000" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
-                  <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-[10px] uppercase tracking-widest bg-white/10 border border-white/20 backdrop-blur-md text-white">{s.tag}</div>
                   <div className="absolute bottom-4 left-4 w-12 h-12 rounded-xl bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg">
                     <s.icon className="w-6 h-6 text-white" />
                   </div>

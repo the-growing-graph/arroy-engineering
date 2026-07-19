@@ -45,7 +45,7 @@ export default function AboutPage() {
 
         <div className="lg:col-span-5 relative">
           <div className="relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/5]">
-            <Image src={IMG.about} alt="About Arroyo" fill sizes="40vw" className="object-cover" />
+            <Image src={IMG.ceo} alt="About Arroyo" fill sizes="40vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
           </div>
           <div className="absolute -left-4 top-10 glass-strong rounded-2xl p-5 max-w-[220px] border border-white/10">
@@ -104,23 +104,22 @@ export default function AboutPage() {
           </div>
           <h2 className="font-display mt-5 text-4xl md:text-5xl font-bold text-white">Engineered by <span className="text-gradient-red">experienced leaders.</span></h2>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {[
-            { n: 'Mr. Chandra Sheikhar', r: 'Founder & CEO', b: '25+ years in civil & EPC, ex-L&T. IIT Bombay.', img: IMG.ceo },
-            { n: 'Sneha Rao', r: 'Executive Director — Oil & Gas', b: '20+ years in downstream & terminals, ex-Reliance.', img: IMG.about },
-            { n: 'Rajiv Malhotra', r: 'CTO — Bridges & Roads', b: 'IIT-Roorkee. Delivered 32 bridges nationally.', img: IMG.aboutAlt },
-            { n: 'Priya Krishnan', r: 'COO', b: '18+ years, ex-Larsen & Toubro. IIM Ahmedabad.', img: IMG.industry3 },
+            { n: 'Mr. Chandra Sheikhar', r: 'Founder & CEO', b: 'Visionary business leader with over two decades of expertise in executing complex civil engineering, infrastructure, and turnkey EPC projects.', img: IMG.ceo },
+            { n: 'Manas Padhan', r: 'Director & Business Strategist', b: 'Dynamic entrepreneur and business leader with diversified interests across mining, finance, petroleum retailing, and infrastructure development.', img: '/manas_pradhan.png' },
+            { n: 'Soumitinjaya Mahakud', r: 'Director — Operations & Manufacturing', b: 'Seasoned business leader with extensive experience in cement manufacturing, industrial plant operations, project execution, and supply chain.', img: '/somitanjaya_mahakud.png' },
           ].map((p, i) => (
             <motion.div key={p.n} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
               className="group rounded-2xl overflow-hidden border border-white/10 bg-white/[0.02]">
               <div className="relative aspect-[4/5] overflow-hidden">
-                <Image src={p.img} alt={p.n} fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
+                <Image src={p.img} alt={p.n} fill sizes="(min-width: 1024px) 30vw, 90vw" className="object-cover group-hover:scale-105 transition-transform duration-700" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
               </div>
               <div className="p-5">
                 <div className="font-display text-lg font-bold text-white">{p.n}</div>
                 <div className="text-xs uppercase tracking-widest text-red-400 mt-1">{p.r}</div>
-                <p className="mt-3 text-sm text-white/60">{p.b}</p>
+                <p className="mt-3 text-sm text-white/60 leading-relaxed">{p.b}</p>
               </div>
             </motion.div>
           ))}

@@ -34,7 +34,13 @@ export default function ServiceDetailClient({ slug }) {
             </div>
           </div>
 
-          <p className="text-lg text-white/70 leading-relaxed">{service.overview}</p>
+          {Array.isArray(service.overview) ? (
+            service.overview.map((para, idx) => (
+              <p key={idx} className="text-lg text-white/70 leading-relaxed mb-5 last:mb-0">{para}</p>
+            ))
+          ) : (
+            <p className="text-lg text-white/70 leading-relaxed">{service.overview}</p>
+          )}
 
           <div className="mt-10">
             <h3 className="font-display text-2xl font-bold text-white mb-6">Our Capabilities</h3>
@@ -49,14 +55,7 @@ export default function ServiceDetailClient({ slug }) {
             </div>
           </div>
 
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {service.deliverables.map((d, i) => (
-              <div key={i} className="p-5 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-transparent">
-                <div className="font-display text-2xl font-bold text-white">{d.k}</div>
-                <div className="text-xs uppercase tracking-widest text-white/50 mt-1">{d.v}</div>
-              </div>
-            ))}
-          </div>
+
 
           <div className="mt-10 flex flex-wrap gap-4">
             <button onClick={() => setOpen(true)} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-red-600 to-red-500 text-white font-semibold shadow-[0_15px_40px_-10px_rgba(220,38,38,0.6)] hover:scale-[1.03] transition">

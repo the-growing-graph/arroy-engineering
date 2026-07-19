@@ -70,7 +70,7 @@ export function About() {
         <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={fadeUp}
           className="relative">
           <div className="relative rounded-3xl overflow-hidden border border-white/10 aspect-[4/5]">
-            <Image src={IMG.about} alt="About Arroyo" fill sizes="(min-width:1024px) 40vw, 90vw" className="object-cover" />
+            <Image src={IMG.ceo} alt="About Arroyo" fill sizes="(min-width:1024px) 40vw, 90vw" className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
           </div>
           {/* Floating stat cards */}

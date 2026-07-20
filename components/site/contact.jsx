@@ -9,19 +9,17 @@ import { toast } from 'sonner';
 
 const schema = z.object({
   name: z.string().min(2, 'Enter your full name'),
-  company: z.string().optional(),
   phone: z.string().min(10, 'Enter a valid phone number'),
   email: z.string().email('Enter a valid email'),
   service: z.string().min(1, 'Select a service'),
   projectType: z.string().optional(),
   message: z.string().min(10, 'Tell us a bit about your requirement'),
-  terms: z.literal(true, { errorMap: () => ({ message: 'Please accept the terms' }) }),
 });
 
 const SERVICES = ['Machinery, Equipments', 'Infrastructure', 'Fuel Station', 'Oil & Gas', 'Construction', 'Road Sectors'];
 const BUDGETS = ['< ₹10 Lakh', '₹10–50 Lakh', '₹50 Lakh – 1 Cr', '₹1–5 Cr', '₹5–25 Cr', '> ₹25 Cr'];
 const TIMELINES = ['Immediate', 'Within 1 Month', '1–3 Months', '3–6 Months', '6+ Months'];
-const TYPES = ['Government', 'Private', 'Public–Private',];
+const TYPES = ['Government', 'Private', 'Semi Government',];
 
 function Field({ label, required, error, children }) {
   return (
@@ -40,23 +38,38 @@ export function Contact() {
   const [done, setDone] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
-    defaultValues: { terms: false },
+    defaultValues: {},
   });
 
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (!res.ok) throw new Error('Submit failed');
+      // WhatsApp Redirect Config
+      const WHATSAPP_NUMBER = "919876543210"; // Noida country code 91 + number
+      const messageText = `Hello Arroyo Engineering Team,
+
+I would like to request a quote. Here are my project details:
+
+*Name:* ${data.name}
+*Phone:* ${data.phone}
+*Email:* ${data.email}
+*Service Required:* ${data.service}
+*Project Type:* ${data.projectType || 'N/A'}
+
+*Project Brief:*
+${data.message}`;
+
+      const encodedMessage = encodeURIComponent(messageText);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+      // Open WhatsApp in new tab
+      window.open(whatsappUrl, '_blank');
+
       setDone(true);
       reset();
-      toast.success('Quote request received. We will call you within 24 business hours.');
+      toast.success('Redirecting to WhatsApp...');
     } catch (e) {
-      toast.error('Something went wrong. Please try again or WhatsApp us.');
+      toast.error('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -122,17 +135,16 @@ export function Contact() {
             ) : (
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="grid md:grid-cols-2 gap-5">
-                  <Field label="Full Name" required error={errors.name?.message}>
-                    <input {...register('name')} className={inputCls} placeholder="Amit Sharma" />
-                  </Field>
-                  <Field label="Company Name" error={errors.company?.message}>
-                    <input {...register('company')} className={inputCls} placeholder="Sharma Enterprises" />
-                  </Field>
+                  <div className="md:col-span-2">
+                    <Field label="Full Name" required error={errors.name?.message}>
+                      <input {...register('name')} className={inputCls} placeholder="Amit Sharma" autoComplete="off" />
+                    </Field>
+                  </div>
                   <Field label="Phone Number" required error={errors.phone?.message}>
-                    <input {...register('phone')} className={inputCls} placeholder="+91 98765 43210" />
+                    <input {...register('phone')} className={inputCls} placeholder="+91 98765 43210" autoComplete="off" />
                   </Field>
                   <Field label="Email Address" required error={errors.email?.message}>
-                    <input {...register('email')} className={inputCls} placeholder="you@company.com" />
+                    <input {...register('email')} className={inputCls} placeholder="you@company.com" autoComplete="off" />
                   </Field>
                   <Field label="Service Required" required error={errors.service?.message}>
                     <div className="relative">
@@ -157,8 +169,6 @@ export function Contact() {
                 <Field label="Project Brief" required error={errors.message?.message}>
                   <textarea {...register('message')} rows={4} className={inputCls} placeholder="Share as much detail as you can about your project scope, site conditions, timeline, etc." />
                 </Field>
-
-                {errors.terms?.message && <div className="text-xs text-red-400">{errors.terms.message}</div>}
 
                 <button type="submit" disabled={loading}
                   className="w-full inline-flex items-center justify-center gap-3 px-7 py-4 rounded-full bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold shadow-[0_20px_50px_-15px_rgba(220,38,38,0.7)] transition disabled:opacity-60">
